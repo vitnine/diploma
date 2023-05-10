@@ -1,2 +1,14 @@
 server:
   port: 8080
+
+kafka-prop:
+  enabled: true
+  topic: example-topic
+
+spring:
+  data:
+    mongodb:
+      database: diploma
+      host: localhost
+      port: 27017
+      username: admin
