@@ -12,4 +12,8 @@ class CargoAggregationServiceImpl(
     override fun addCargo(cargo: CargoDto) {
         cargoRepository.save(cargo.toCargoEntity())
     }
+
+    override fun aggregateByWeight(min: Double?, max: Double?): List<CargoDto> {
+        return cargoRepository.aggregate(min, max) ?: emptyList()
+    }
 }
