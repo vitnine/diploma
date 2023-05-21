@@ -2,6 +2,7 @@ package ru.vitnine.aggregationservice.repository.entity
 
 import org.springframework.data.annotation.Id
 import org.springframework.data.mongodb.core.mapping.Document
+import ru.vitnine.aggregationservice.model.CargoDto
 import ru.vitnine.aggregationservice.model.Fossil
 import ru.vitnine.aggregationservice.model.Placement
 import java.util.UUID
@@ -13,4 +14,12 @@ data class CargoEntity(
     val fromPlace: Placement,
     val toPlace: Placement,
     val fossil: Fossil
-)
+) {
+    fun toCargoDto(): CargoDto {
+        return CargoDto(
+            fromPlace = fromPlace,
+            toPlace = toPlace,
+            fossil = fossil,
+        )
+    }
+}

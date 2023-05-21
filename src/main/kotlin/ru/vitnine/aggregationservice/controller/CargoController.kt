@@ -1,13 +1,16 @@
 package ru.vitnine.aggregationservice.controller
 
+import org.springframework.data.domain.Page
+import org.springframework.data.domain.PageRequest
+import org.springframework.data.domain.Pageable
 import org.springframework.http.ResponseEntity
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.RequestBody
-import org.springframework.web.bind.annotation.RequestParam
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.bind.annotation.*
 import ru.vitnine.aggregationservice.model.CargoDto
+import ru.vitnine.aggregationservice.model.request.CargoFilterRequest
+import ru.vitnine.aggregationservice.model.request.PageableFilter
+import ru.vitnine.aggregationservice.repository.entity.CargoEntity
 import ru.vitnine.aggregationservice.service.CargoAggregationService
+
 
 @RestController
 class CargoController(
@@ -24,8 +27,14 @@ class CargoController(
         return ResponseEntity.ok("Cargo information was added successfully")
     }
 
-    @GetMapping("cargo/aggregate_weight")
-    fun aggregateByWeight(@RequestParam min: Double?, max:Double?): List<CargoDto> {
-        return cargoAggregationService.aggregateByWeight(min, max)
+    @PostMapping("cargo/aggregate")
+    fun aggregateByFilter(@RequestBody filter: CargoFilterRequest): List<Any> {
+        return cargoAggregationService.aggregateByFilter(filter.toCargoFilter())
+    }
+
+    @PostMapping("cargo/filter")
+    fun filterCargo(@RequestBody filter: PageableFilter): List<CargoDto> {
+        val paging: Pageable = PageRequest.of(filter.page, filter.size)
+        return cargoAggregationService.filterCargo(paging)
     }
 }

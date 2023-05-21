@@ -1,7 +1,8 @@
 package ru.vitnine.aggregationservice.repository
 
-import ru.vitnine.aggregationservice.model.CargoDto
+import ru.vitnine.aggregationservice.model.CargoFilter
+import ru.vitnine.aggregationservice.model.FilterPageRequest
 
 interface CargoAggregationRepository {
-    fun aggregate(minWeight: Double?, maxWeight: Double?): List<CargoDto>?
+    fun aggregate(filter: FilterPageRequest<CargoFilter>): List<Any>?
 }

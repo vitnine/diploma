@@ -1,8 +1,13 @@
 package ru.vitnine.aggregationservice.service.impl
 
+import org.springframework.data.domain.Page
+import org.springframework.data.domain.Pageable
 import org.springframework.stereotype.Service
 import ru.vitnine.aggregationservice.model.CargoDto
+import ru.vitnine.aggregationservice.model.CargoFilter
+import ru.vitnine.aggregationservice.model.FilterPageRequest
 import ru.vitnine.aggregationservice.repository.CargoRepository
+import ru.vitnine.aggregationservice.repository.entity.CargoEntity
 import ru.vitnine.aggregationservice.service.CargoAggregationService
 
 @Service
@@ -13,7 +18,11 @@ class CargoAggregationServiceImpl(
         cargoRepository.save(cargo.toCargoEntity())
     }
 
-    override fun aggregateByWeight(min: Double?, max: Double?): List<CargoDto> {
-        return cargoRepository.aggregate(min, max) ?: emptyList()
+    override fun aggregateByFilter(filter: FilterPageRequest<CargoFilter>): List<Any> {
+        return cargoRepository.aggregate(filter) ?: emptyList()
+    }
+
+    override fun filterCargo(filter: Pageable): List<CargoDto> {
+        return cargoRepository.findAll(filter).content.map { it.toCargoDto() }
     }
 }

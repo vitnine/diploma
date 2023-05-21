@@ -1,7 +1,8 @@
 package ru.vitnine.aggregationservice.model
 
 data class CargoFilter (
-    val minWeight: Double?,
-    val maxWeight: Double?,
-    val name: String? = "Железо"
+    val city: String? = null,
+    val minWeight: Int? = null,
+    val maxWeight: Int? = null,
+    val name: String? = null,
 )
