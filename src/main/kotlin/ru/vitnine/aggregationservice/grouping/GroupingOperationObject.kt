@@ -3,7 +3,7 @@ package ru.vitnine.aggregationservice.grouping
 import org.springframework.data.mongodb.core.aggregation.GroupOperation
 import org.springframework.data.mongodb.core.aggregation.ProjectionOperation
 
-interface GroupingOperationObject {
+interface GroupingOperation {
 
     fun getGroupingType(): GroupingType
 
