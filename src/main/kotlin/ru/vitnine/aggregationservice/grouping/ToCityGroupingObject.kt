@@ -15,13 +15,16 @@ class ToCityGroupingObject: GroupingOperationObject {
 
     override fun getGroupOperation(): GroupOperation {
         return Aggregation.group("toPlace.city")
-            .last("toPlace.city").`as`("city")
             .avg("fossil.weight").`as`("average_weight")
             .sum("fossil.weight").`as`("total_weight")
     }
 
     override fun getProjectOperation(): ProjectionOperation {
-        return project("document_id", "average_weight", "total_weight")
-            .and("city").previousOperation()
+        return project()
+            .andExpression("_id").`as`("city")
+            .andExpression("average_weight").`as`("average_weight_delivered_to")
+            .andExpression("total_weight").`as`("total_weight_delivered_to")
+            .andExpression("_id").`as`("city")
+            .andExclude("_id")
     }
 }

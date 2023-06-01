@@ -23,19 +23,18 @@ class CargoAggregationRepositoryImpl(
     override fun aggregate(filter: FilterPageRequest<CargoFilter>): List<Any>? {
         val matchOperation: MatchOperation = getMatchOperation(filter.filter)
         val skipOperation: SkipOperation = getSkipOperation(filter.page.toLong(), filter.size.toLong())
-//        val limitOperation: LimitOperation = getLimitOperation(filter.size.toLong())
-        val limitOperation: LimitOperation? = null
+        val limitOperation: LimitOperation = getLimitOperation(filter.size.toLong())
         val sortOperation: SortOperation = getSortOperation(filter.sortType)
         val groupOperation: GroupOperation? = filter.groupingType?.let { getGroupOperation(it) }
         val projectionOperation: ProjectionOperation? = filter.groupingType?.let { getProjectOperation(it) }
 
         return mongoTemplate.aggregate(newAggregation(
             matchOperation,
-//            skipOperation,
-//            limitOperation?.let { it },
-//            if (sortOperation == Sort.unsorted()) null else sortOperation,
             groupOperation,
-//            projectionOperation
+            sortOperation,
+            projectionOperation,
+            skipOperation,
+            limitOperation,
         ),
             CargoEntity::class.java,
             Any::class.java).mappedResults

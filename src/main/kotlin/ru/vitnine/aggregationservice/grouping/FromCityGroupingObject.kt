@@ -20,7 +20,11 @@ class FromCityGroupingObject: GroupingOperationObject {
     }
 
     override fun getProjectOperation(): ProjectionOperation {
-        return project("productIds", "averagePrice", "totalRevenue")
-            .and("warehouse").previousOperation();
+        return project()
+            .andExpression("_id").`as`("city")
+            .andExpression("average_weight").`as`("average_weight_delivered_from")
+            .andExpression("total_weight").`as`("total_weight_delivered_from")
+            .andExpression("_id").`as`("city")
+            .andExclude("_id")
     }
 }

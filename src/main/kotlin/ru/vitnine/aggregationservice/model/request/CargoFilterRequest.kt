@@ -18,7 +18,6 @@ data class CargoFilterRequest(
         return FilterPageRequest(
             page = this.page,
             size = this.size,
-//            groupingType = groupingType?.let { GroupingType.valueOf(groupingType) },
             groupingType = groupingType,
             filter = CargoFilter(
                 city = city,
