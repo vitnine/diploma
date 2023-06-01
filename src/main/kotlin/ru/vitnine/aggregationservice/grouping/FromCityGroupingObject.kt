@@ -21,10 +21,9 @@ class FromCityGrouping: GroupingOperation {
 
     override fun getProjectOperation(): ProjectionOperation {
         return project()
-            .andExpression("_id").`as`("city")
+            .andExpression("_id").`as`("from_city")
             .andExpression("average_weight").`as`("average_weight_delivered_from")
             .andExpression("total_weight").`as`("total_weight_delivered_from")
-            .andExpression("_id").`as`("city")
             .andExclude("_id")
     }
 }

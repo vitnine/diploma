@@ -45,9 +45,9 @@ class CargoAggregationRepositoryImpl(
         mongoFilter.minWeight?.let { criterias.add(where("fossil.weight").gte(it)) }
         mongoFilter.maxWeight?.let { criterias.add(where("fossil.weight").lte(it)) }
         mongoFilter.name?.let { criterias.add(where("fossil.name").`is`(it)) }
-        mongoFilter.city?.let { criterias.add(where("fossil.city").`is`(it)) }
+        mongoFilter.fromCity?.let { criterias.add(where("fromPlace.city").`is`(it)) }
+        mongoFilter.toCity?.let { criterias.add(where("toPlace.city").`is`(it)) }
         val criteria = if (criterias.isNotEmpty()) Criteria().andOperator(*criterias.toTypedArray()) else Criteria()
-
         return match(criteria)
     }
 

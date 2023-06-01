@@ -8,10 +8,11 @@ import ru.vitnine.aggregationservice.model.FilterPageRequest
 
 @JsonNaming(SnakeCaseStrategy::class)
 data class CargoFilterRequest(
-    val city: String? = null,
+    val fromCity: String? = null,
+    val toCity: String? = null,
     val minWeight: Int? = null,
     val maxWeight: Int? = null,
-    val name: String? = null,
+    val fossilName: String? = null,
     val groupingType: GroupingType? = null
 ): PageableFilter() {
     fun toCargoFilter(): FilterPageRequest<CargoFilter> {
@@ -20,10 +21,11 @@ data class CargoFilterRequest(
             size = this.size,
             groupingType = groupingType,
             filter = CargoFilter(
-                city = city,
+                fromCity = fromCity,
+                toCity = toCity,
                 minWeight = minWeight,
                 maxWeight = maxWeight,
-                name = name,
+                name = fossilName,
             )
         )
     }
