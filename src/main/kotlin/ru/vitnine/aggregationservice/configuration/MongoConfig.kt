@@ -1,17 +1,13 @@
 package ru.vitnine.aggregationservice.configuration
 
 import com.mongodb.client.MongoClient
-import com.mongodb.client.MongoClients
 import jakarta.annotation.PostConstruct
 import org.bson.types.Binary
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.core.convert.converter.Converter
-import org.springframework.data.mongodb.MongoDatabaseFactory
-import org.springframework.data.mongodb.core.MongoClientFactoryBean
 import org.springframework.data.mongodb.core.MongoTemplate
-import org.springframework.data.mongodb.core.SimpleMongoClientDatabaseFactory
 import org.springframework.data.mongodb.core.convert.DefaultMongoTypeMapper
 import org.springframework.data.mongodb.core.convert.MappingMongoConverter
 import org.springframework.data.mongodb.core.convert.MongoCustomConversions

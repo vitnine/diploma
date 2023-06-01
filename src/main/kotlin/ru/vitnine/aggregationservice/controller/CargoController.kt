@@ -1,6 +1,5 @@
 package ru.vitnine.aggregationservice.controller
 
-import org.springframework.data.domain.Page
 import org.springframework.data.domain.PageRequest
 import org.springframework.data.domain.Pageable
 import org.springframework.http.ResponseEntity
@@ -8,7 +7,6 @@ import org.springframework.web.bind.annotation.*
 import ru.vitnine.aggregationservice.model.CargoDto
 import ru.vitnine.aggregationservice.model.request.CargoFilterRequest
 import ru.vitnine.aggregationservice.model.request.PageableFilter
-import ru.vitnine.aggregationservice.repository.entity.CargoEntity
 import ru.vitnine.aggregationservice.service.CargoAggregationService
 
 
