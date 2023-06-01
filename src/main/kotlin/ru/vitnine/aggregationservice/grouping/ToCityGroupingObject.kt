@@ -7,7 +7,7 @@ import org.springframework.data.mongodb.core.aggregation.ProjectionOperation
 import org.springframework.stereotype.Component
 
 @Component
-class ToCityGroupingObject: GroupingOperationObject {
+class ToCityGrouping: GroupingOperation {
 
     override fun getGroupingType(): GroupingType {
         return GroupingType.TO_CITY

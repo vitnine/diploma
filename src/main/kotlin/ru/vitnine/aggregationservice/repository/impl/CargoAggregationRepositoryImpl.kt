@@ -7,10 +7,10 @@ import org.springframework.data.mongodb.core.aggregation.Aggregation.*
 import org.springframework.data.mongodb.core.query.Criteria
 import org.springframework.data.mongodb.core.query.Criteria.where
 import org.springframework.stereotype.Repository
+import ru.vitnine.aggregationservice.grouping.GroupingOperation
 import ru.vitnine.aggregationservice.model.CargoFilter
 import ru.vitnine.aggregationservice.model.FilterPageRequest
 import ru.vitnine.aggregationservice.grouping.GroupingType
-import ru.vitnine.aggregationservice.grouping.GroupingOperationObject
 import ru.vitnine.aggregationservice.repository.CargoAggregationRepository
 import ru.vitnine.aggregationservice.repository.entity.CargoEntity
 
@@ -18,7 +18,7 @@ import ru.vitnine.aggregationservice.repository.entity.CargoEntity
 @Repository
 class CargoAggregationRepositoryImpl(
     val mongoTemplate: MongoTemplate,
-    val groupingOperationObject: Set<GroupingOperationObject>
+    val groupingOperation: Set<GroupingOperation>
 ): CargoAggregationRepository {
     override fun aggregate(filter: FilterPageRequest<CargoFilter>): List<Any>? {
         val matchOperation: MatchOperation = getMatchOperation(filter.filter)
@@ -52,12 +52,12 @@ class CargoAggregationRepositoryImpl(
     }
 
     private fun getGroupOperation(type: GroupingType): GroupOperation {
-        val chosenGroupOperation = groupingOperationObject.filter { it.getGroupingType() == type }.toSet().first()
+        val chosenGroupOperation = groupingOperation.filter { it.getGroupingType() == type }.toSet().first()
         return chosenGroupOperation.getGroupOperation()
     }
 
     private fun getProjectOperation(type: GroupingType): ProjectionOperation {
-        val chosenGroupOperation = groupingOperationObject.filter { it.getGroupingType() == type }.toSet().first()
+        val chosenGroupOperation = groupingOperation.filter { it.getGroupingType() == type }.toSet().first()
         return chosenGroupOperation.getProjectOperation()
     }
 
